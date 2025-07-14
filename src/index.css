@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+  --font-primary: 'Outfit', sans-serif;
+
+  --color-bg:  #fefefe;
+  --color-dark-bg: #0d0d0d;
+
+  --color-bg-50: #f6f6f6;
+  --color-dark-bg-50: #1a1a1a;
+
+  --color-text: #1a1a1a;
+  --color-dark-text: #f5f5f5;
+
+  --color-text-muted: #4b4b4b;
+  --color-dark-text-muted: #a0a0a0;
+
+  --color-primary: #ffd93d;
+  --color-primary-accent: #ffc107; 
+
+  --breakpoint-sx: 385px;
+  
+  --color-dark: var(--color-neutral-700);
+  --shadow-default: 0 20px 50px oklch(43.9% 0 0);
+  --shadow-box: 0px 2px 12px oklch(58.971% 0.00007 271.152);
+  
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+* {
+  font-family: var(--font-primary);
+  transition: all 0.2s ease-in-out;
+}
+
+body {
+  @apply bg-bg text-text dark:bg-dark-bg dark:text-dark-text transition-colors duration-300 ease-in-out;
+}
+
+
+/* --------------------------------- */
+
+.btn {
+  @apply inline-flex items-center justify-center px-4 py-2 rounded-full cursor-pointer hover:scale-105 font-semibold transition-all duration-300;
+}
+
+.page-heading {
+  @apply text-[28px] md:text-4xl text-gray-900 dark:text-gray-100 leading-tight font-bold mb-8 sm:mb-12 text-center;
+}
+
+.page-subheading {
+  @apply text-center mx-auto text-[12px] sm:text-base max-w-2xl text-text-muted dark:text-dark-text-muted;
+}
+
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 10px;
+  min-height: 10px;
+  cursor: pointer;
+}
+
+.skeleton {
+  opacity: 0.7;
+  animation: skeleton-animation .5s infinite linear alternate;
+}
+
+.skeleton-text {
+  width: 90%;
+  height: .5rem;
+  margin-bottom: .25rem;
+  border-radius: 0.125rem;
+}
+
+@keyframes skeleton-animation {
+  0% {
+    background-color: hsl(200, 20%, 70%);
+  }
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  appearance: none;
+  -webkit-appearance: none;
+}
