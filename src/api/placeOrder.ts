@@ -59,7 +59,7 @@ const initializePayment = ({
     name: "Credit Payment",
     description: "Purchase credits",
     order_id: order.id,
-    handler: async (paymentDetails) => {
+    handler: async (paymentDetails: unknown) => {
       try {
         const token = await getToken();
         const res = await axiosInstance.post("/orders/verify", paymentDetails, {
