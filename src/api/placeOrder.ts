@@ -1,6 +1,13 @@
 import toast from "react-hot-toast";
 import axiosInstance from "./axiosInstance";
 
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Razorpay: any;
+  }
+}
+
 export const placeOrder = async ({
   planId,
   getToken,
@@ -21,7 +28,7 @@ export const placeOrder = async ({
         },
       }
     );
-    if (response.status === 200) {
+    if (response.status === 201) {
       initializePayment({
         order: response.data.data,
         getToken,
@@ -53,13 +60,14 @@ const initializePayment = ({
   onSuccess: () => void;
 }) => {
   const options = {
-    key: import.meta.env.VITE_RAZORPAY_KEY,
+    key: import.meta.env.VITE_RAZORPAY_KEY_ID,
     amount: order.amount,
     currency: order.currency,
     name: "Credit Payment",
     description: "Purchase credits",
     order_id: order.id,
     handler: async (paymentDetails: unknown) => {
+      console.log("Payment details:", paymentDetails);
       try {
         const token = await getToken();
         const res = await axiosInstance.post("/orders/verify", paymentDetails, {
@@ -77,6 +85,6 @@ const initializePayment = ({
       }
     },
   };
-  const razorpay = new (window as any).Razorpay(options);
+  const razorpay = new window.Razorpay(options);
   razorpay.open();
 };

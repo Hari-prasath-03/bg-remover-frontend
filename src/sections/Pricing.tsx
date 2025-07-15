@@ -5,7 +5,7 @@ import { useAuthContext } from "../context/AuthContext";
 import { placeOrder } from "../api/placeOrder";
 
 const Pricing = () => {
-    const { loadUserCredits } = useAuthContext();
+  const { loadUserCredits } = useAuthContext();
   const { isSignedIn, getToken } = useAuth();
   const { openSignIn } = useClerk();
 
@@ -19,6 +19,7 @@ const Pricing = () => {
       onSuccess: () => loadUserCredits(),
     });
   };
+  
   return (
     <section className="relative">
       <div className="container mx-auto">
